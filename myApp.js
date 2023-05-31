@@ -36,34 +36,17 @@ const createAndSavePerson = (done) => {
   });
 };
 
-
+const arrayOfPeople = [
+  {name: 'John', age: 30, favoriteFoods: ['Pizza', 'Burger']},
+  {name: 'Emily', age: 25,favoriteFoods: ['Sushi', 'Ice Cream']},
+  {name: 'Michael', age: 40, favoriteFoods: ['Steak', 'Pasta', 'Chocolate']}
+];
 
 const createManyPeople = (arrayOfPeople, done) => {
-  
-  const arrayOfPeople = [
-    {
-      name: 'John',
-      age: 30,
-      favoriteFoods: ['Pizza', 'Burger']
-    },
-    {
-      name: 'Emily',
-      age: 25,
-      favoriteFoods: ['Sushi', 'Ice Cream']
-    },
-    {
-      name: 'Michael',
-      age: 40,
-      favoriteFoods: ['Steak', 'Pasta', 'Chocolate']
-    }
-  ];
+
   Person.create(arrayOfPeople, function(err, createdPeople) {
-    if (err) {
-      console.error(err);
-      done(err);
-    } else {
-      done(null, createdPeople);
-    }
+    if (err) return console.error(err);
+    done(null, createdPeople);
   });
 };
 
