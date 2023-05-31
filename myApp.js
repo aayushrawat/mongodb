@@ -1,5 +1,22 @@
 require('dotenv').config();
+const mongoose = require('mongoose');
+const uri = process.env.MONGO_URI;
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
+// Listen for the connected event
+mongoose.connection.on('connected', () => {
+  console.log('Database connected successfully!');
+});
+
+// Listen for the error event
+mongoose.connection.on('error', (err) => {
+  console.error('Database connection error:', err);
+});
+
+// Listen for the disconnected event
+mongoose.connection.on('disconnected', () => {
+  console.log('Database disconnected');
+});
 
 let Person;
 
