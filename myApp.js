@@ -1,7 +1,11 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
 const uri = process.env.MONGO_URI;
+
+
+
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
 // Listen for the connected event
 mongoose.connection.on('connected', () => {
   console.log('Database connected successfully!');
@@ -32,7 +36,11 @@ favoriteFoods: {
 const Person = mongoose.model('Person', personSchema);
 
 const createAndSavePerson = (done) => {
-  done(null /*, data*/);
+  const ironman = new Person({name: "ironman", age: 45, favoriteFoods: ['Burger', 'Cake', 'Taccos']});
+  ironman.save(function(err,data){
+    if (err) return console.error(err);
+    done(null /*, data*/);
+  });
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
