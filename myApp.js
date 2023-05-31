@@ -20,16 +20,9 @@ mongoose.connection.on('disconnected', () => {
 });
 
 const personSchema = new mongoose.Schema({
-name: {
-  type: String,
-  required: true
-},
-age: {
-  type: Number
-},
-favoriteFoods: {
-  type: [String]
-}
+name: String,
+age: Number,
+favoriteFoods: [String]
 });
 
 
