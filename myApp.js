@@ -28,6 +28,12 @@ favoriteFoods: [String]
 
 const Person = mongoose.model('Person', personSchema);
 
+const arrayOfPeople = [
+  {name: 'John', age: 30, favoriteFoods: ['Pizza', 'Burger']},
+  {name: 'Emily', age: 25,favoriteFoods: ['Sushi', 'Ice Cream']},
+  {name: 'Michael', age: 40, favoriteFoods: ['Steak', 'Pasta', 'Chocolate']}
+];
+
 const createAndSavePerson = (done) => {
   const ironman = new Person({name: "ironman", age: 45, favoriteFoods: ['Burger', 'Cake', 'Taccos']});
   ironman.save(function(err,data){
@@ -35,12 +41,6 @@ const createAndSavePerson = (done) => {
     done(null, data);
   });
 };
-
-const arrayOfPeople = [
-  {name: 'John', age: 30, favoriteFoods: ['Pizza', 'Burger']},
-  {name: 'Emily', age: 25,favoriteFoods: ['Sushi', 'Ice Cream']},
-  {name: 'Michael', age: 40, favoriteFoods: ['Steak', 'Pasta', 'Chocolate']}
-];
 
 const createManyPeople = (arrayOfPeople, done) => {
 
@@ -58,7 +58,10 @@ const findPeopleByName = function(personName, done) {
 };
 
 const findOneByFood = (food, done) => {
-  done(null /*, data*/);
+  Person.findOne({favoriteFoods:food}, function(err, data){
+    if (err) return console.log(err);
+    done(null, data);
+  });
 };
 
 const findPersonById = (personId, done) => {
